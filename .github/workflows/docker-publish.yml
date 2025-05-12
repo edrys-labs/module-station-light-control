@@ -27,7 +27,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./lights-server
-          file: ./lights-server/Dockerfile
+          context: ./station-lights-server
+          file: ./station-lights-server/Dockerfile
           push: true
           tags: edryslabs/station-lights-server:latest
