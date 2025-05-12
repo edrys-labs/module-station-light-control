@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="A module to control lights in a station based on user presence."
+    />
+    <meta name="show-in" content="*" />
+    <meta 
+      name="module-config" 
+      content="{
+        'stationConfig': {
+          'lightIp': {
+            'type': string,
+            'hint': 'Light IP address',
+          },
+        },
+      }" 
+    />
+
+    <title>Station Light Control</title>
+
+    <script src="https://edrys-labs.github.io/module/edrys.js"></script>
+    <script
+      defer
+      src="https://edrys-labs.github.io/module/vendor/alpine.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://edrys-labs.github.io/module/vendor/water.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://edrys-labs.github.io/module/vendor/open-iconic/css/open-iconic.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="./style.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="status-card">
+        <div class="status-row">
+          <div class="label">Users in Station:</div>
+          <div class="value" id="users-num">0</div>
+        </div>
+        <div class="status-row">
+          <div class="label">Light:</div>
+          <div class="value">
+            <span id="light-status" class="light-indicator off">OFF</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
