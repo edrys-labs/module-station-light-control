@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  station-lights-server:
+    build: 
+      context: ./station-lights-server
+    container_name: station-lights-server
+    ports:
+      - "3000:3000"
