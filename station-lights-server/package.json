@@ -1,0 +1,14 @@
+{
+  "name": "station-lights-server",
+  "version": "1.0.0",
+  "description": "Server for controlling Elgato lights in edrys stations",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "node-fetch-commonjs": "^3.3.2"
+  }
+}
