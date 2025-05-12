@@ -25,7 +25,7 @@ app.get('/api/light', async (req, res) => {
 });
 
 app.post('/api/light', async (req, res) => {
-  console.log('toggle', req.body);
+  console.log('Toggle', req.body);
   
   const { on, brightness, temperature, ip } = req.body;
   
