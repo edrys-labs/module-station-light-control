@@ -3,6 +3,8 @@ const lightStatus = document.getElementById("light-status");
 
 let lastUsersCount = 0;
 let stationUsers = [];
+let lightOn = false;
+let stationId = null;
 
 Edrys.onReady(async () => {
   usersNum.innerText = 0;
@@ -12,14 +14,50 @@ Edrys.onReady(async () => {
     console.warn("Light IP not configured in stationConfig");
   }
 
+  // Generate a unique ID for this station instance
+  stationId = Edrys.username + '-' + Edrys.class_id + '-' + Date.now();
+  
   checkUsersInStation();
 
   setInterval(() => {
     checkUsersInStation();
   }, 2000);
 
+  startHeartbeat();
+
   document.getElementById("light-status").className = "light-indicator off";
 });
+
+// Send heartbeats to the server (to keep track of active stations)
+function startHeartbeat() {
+  sendHeartbeat();
+  
+  setInterval(() => {
+    sendHeartbeat();
+  }, 10000);
+}
+
+async function sendHeartbeat() {
+  const lightIp = Edrys.module.stationConfig?.lightIp;
+  
+  if (!lightIp || !stationId) {
+    return;
+  }
+  
+  try {
+    await fetch("http://localhost:3000/api/heartbeat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        stationId,
+        lightIp,
+        lightState: lightOn
+      }),
+    });
+  } catch (error) {
+    console.error("Failed to send heartbeat:", error);
+  }
+}
 
 checkUsersInStation = () => {
   if (Edrys.liveUser.room.startsWith("Station")) {
@@ -53,8 +91,6 @@ checkUsersInStation = () => {
   }
   return false;
 };
-
-let lightOn = false;
 
 async function setLightState(on) {
   const lightIp = Edrys.module.stationConfig?.lightIp;
