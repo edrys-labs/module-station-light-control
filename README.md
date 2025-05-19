@@ -59,5 +59,11 @@ The backend server provides these endpoints:
     "ip": "192.169.1.100" // Light IP address (lightIp)
   }
   ```
-
-
+- `POST /api/heartbeat`: Send a heartbeat to keep track of active stations (ensures lights are turned off when a station window is closed, but the light is still on):
+  ```json
+  {
+    "stationId": "unique-station-id", // Unique identifier for the station instance
+    "lightIp": "192.169.1.100", // Light IP address
+    "lightState": true // Current state of the light (true if on, false if off)
+  }
+  ```
